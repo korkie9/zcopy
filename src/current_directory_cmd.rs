@@ -29,7 +29,6 @@ pub fn check_and_move_from_current_dir(
     if string_to_check.contains(&formatted_destination) {
         // Check if the file exists
         let file_exists = check_if_file_exists(destination, files_to_move);
-        println!("file exists: {}", file_exists);
         if file_exists {
             return true;
         }
