@@ -7,6 +7,7 @@ use relative_directory_cmd::check_and_move_from_relative_dir;
 mod set_destination;
 use set_destination::set_destination;
 
+mod check_if_file_is_dir;
 mod file_checker;
 
 use std::env;

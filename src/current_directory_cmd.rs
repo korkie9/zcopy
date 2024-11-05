@@ -1,4 +1,4 @@
-use crate::file_checker::check_if_file_exists;
+use crate::{check_if_file_is_dir::file_is_dir, file_checker::check_if_file_exists};
 use std::process::Command;
 
 pub fn check_and_move_from_current_dir(
@@ -19,21 +19,30 @@ pub fn check_and_move_from_current_dir(
         .expect("An issue occured when trying to find the directory");
     let string_to_check = String::from_utf8_lossy(&list_to_check_cmd.stdout);
 
+    let formatted_destination: String = destination
+        .chars()
+        .skip(1)
+        .take(destination.len() - 2)
+        .collect();
+
     //Move files if current directory exists
-    if string_to_check.contains(destination) {
+    if string_to_check.contains(&formatted_destination) {
         // Check if the file exists
         let file_exists = check_if_file_exists(destination, files_to_move);
+        println!("file exists: {}", file_exists);
         if file_exists {
             return true;
         }
         let platform_cmd = if cfg!(target_os = "windows") {
-            "move"
+            "copy"
         } else {
-            "mv"
+            "cp"
         };
+        let is_dir = file_is_dir(files_to_move_as_string);
+        let recursive_appendage = if is_dir { "-r" } else { "" };
         let move_to_dir_cmd_string = format!(
-            "{} {} {}",
-            platform_cmd, files_to_move_as_string, destination
+            "{} {} {} {}",
+            platform_cmd, recursive_appendage, files_to_move_as_string, destination
         );
 
         let move_to_dir_cmd = Command::new("sh")
@@ -42,7 +51,7 @@ pub fn check_and_move_from_current_dir(
             .output()
             .expect("An issue occured when moving the files");
         if move_to_dir_cmd.status.success() {
-            println!("Moved {} to {}\n", files_to_move_as_string, destination);
+            println!("Copied {} to {}\n", files_to_move_as_string, destination);
         } else {
             print!("File not recognized\n");
         }

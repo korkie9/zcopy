@@ -1,4 +1,4 @@
-use crate::file_checker::check_if_file_exists;
+use crate::{check_if_file_is_dir::file_is_dir, file_checker::check_if_file_exists};
 use std::process::Command;
 
 pub fn check_and_move_from_relative_dir(
@@ -23,10 +23,19 @@ pub fn check_and_move_from_relative_dir(
 
     // Move file(s) to specified zoxide directory
     if move_to_dir_cmd.status.success() {
+        let is_dir = file_is_dir(files_to_move_as_string);
+        let recursive_appendage = if is_dir { "" } else { "-r" };
+
         let mv_cmd_string = if cfg!(target_os = "windows") {
-            format!("copy {} '{}'", files_to_move_as_string, dir_to_move_to)
+            format!(
+                "copy {} {} '{}'",
+                files_to_move_as_string, recursive_appendage, dir_to_move_to
+            )
         } else {
-            format!("cp {} '{}'", files_to_move_as_string, dir_to_move_to)
+            format!(
+                "cp {} {} '{}'",
+                files_to_move_as_string, recursive_appendage, dir_to_move_to
+            )
         };
 
         let mv_cmd = Command::new("sh")
@@ -36,7 +45,7 @@ pub fn check_and_move_from_relative_dir(
             .expect("Failed to move files");
 
         if mv_cmd.status.success() {
-            println!("Moved {} to {}\n", files_to_move_as_string, dir_to_move_to);
+            println!("Copied {} to {}\n", files_to_move_as_string, dir_to_move_to);
             return;
         }
         print!("File not recognized\n");
