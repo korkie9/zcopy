@@ -8,7 +8,7 @@ Copy files or directories to any directory you've already been to
  - [zoxide](https://github.com/ajeetdsouza/zoxide)
 
 
-NOTE: Support has been added for Zmove on Windows but it is currently untested on Windows
+NOTE: Support has been added for ZCopy on Windows but it is currently untested on Windows
 
 ### To install
 
@@ -44,4 +44,4 @@ Eg. If you would like to move multiple files to another directory, run ``zcp *.t
 
 
 ### Contribute
-- Feel free to raise issues and make pull requests at ``https://github.com/korkie9/zmove``
+- Feel free to raise issues and make pull requests at ``https://github.com/korkie9/zcopy``
