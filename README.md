@@ -45,3 +45,8 @@ Eg. If you would like to move multiple files to another directory, run ``zcp *.t
 
 ### Contribute
 - Feel free to raise issues and make pull requests at ``https://github.com/korkie9/zcopy``
+
+
+### Related projects
+- Zmove ``https://github.com/korkie9/zmove``
+
