@@ -1,0 +1,17 @@
+[package]
+name = "zcopy"
+version = "0.0.1"
+edition = "2021"
+description = "Copy files in the command line with ease"
+authors = ["Justin Korkie justinjkorkie@gmail.com"]
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/korkie9/zcopy"
+documentation = "https://docs.rs/crate/zcopy/latest"
+
+[dependencies]
+
+
+[[bin]]
+name = "zcp"
+path = "src/main.rs"   
