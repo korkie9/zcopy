@@ -13,7 +13,7 @@ use std::env;
 
 //TODO: Add the following to check if file is directory:
 //test -d path && echo "Directory Exists"
-//
+
 fn main() {
     let args: Vec<String> = env::args().collect();
 
