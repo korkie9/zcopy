@@ -26,9 +26,12 @@ pub fn check_and_move_from_current_dir(
         .collect();
 
     //Move files if current directory exists
-    if string_to_check.contains(&formatted_destination) {
+    if string_to_check
+        .trim()
+        .contains(&formatted_destination.trim())
+    {
         // Check if the file exists
-        let file_exists = check_if_file_exists(destination, files_to_move);
+        let file_exists = check_if_file_exists(&formatted_destination.trim(), files_to_move);
         if file_exists {
             return true;
         }
