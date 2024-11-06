@@ -10,6 +10,7 @@ pub fn file_is_dir(path: &String) -> bool {
 
     if output.status.success() {
         let stdout = String::from_utf8_lossy(&output.stdout);
+
         return stdout.trim() == "true";
     }
     return false;

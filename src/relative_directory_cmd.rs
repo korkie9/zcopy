@@ -24,7 +24,7 @@ pub fn check_and_move_from_relative_dir(
     // Move file(s) to specified zoxide directory
     if move_to_dir_cmd.status.success() {
         let is_dir = file_is_dir(files_to_move_as_string);
-        let recursive_appendage = if is_dir { "" } else { "-r" };
+        let recursive_appendage = if is_dir { "-r" } else { "" };
 
         let mv_cmd_string = if cfg!(target_os = "windows") {
             format!(
