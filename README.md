@@ -48,4 +48,4 @@ Eg. If you would like to move multiple files to another directory, run ``zcp *.t
 
 
 ### Related projects
-- [zmove](https://crates.io/crates/zcopy)
+- [zmove](https://crates.io/crates/zmove)
